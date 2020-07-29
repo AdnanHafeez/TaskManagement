@@ -38,4 +38,16 @@ export class TasksService {
         }
     }
 
+    updateTaskStatus(id: string, status: TaskStatus) : Task {
+        let task: Task = this.getTaskById(id);
+        if(task)
+        {
+            task.status = status;
+            return task;
+        }
+        else {
+            throw new NotFoundException('Task not found');
+        }
+    }
+
 }
