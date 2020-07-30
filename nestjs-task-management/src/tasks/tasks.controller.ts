@@ -2,6 +2,7 @@ import { Controller, Get, Post, Body, Logger, Param, Delete, Patch, Query } from
 import { TasksService } from './tasks.service';
 import { Task, TaskStatus } from './task.model';
 import { CreateTaskDto } from './dto/create-task.dto';
+import { GetTaskFilterDto } from './dto/get-task-filter.dto';
 
 @Controller('tasks')
 export class TasksController {
@@ -11,13 +12,10 @@ export class TasksController {
         }
 
     @Get()
-    getAllTasks(
-        @Query('status') status: TaskStatus,
-        @Query('search') search: string
-        ): Task[] {
-            
-        if(status || search){
-            return this.tasksService.getTasksByFilter(status, search);
+    getTasks(
+       @Query() taskFilterDto : GetTaskFilterDto): Task[] {
+        if(Object.keys(taskFilterDto).length) {
+            return this.tasksService.getTasksWithFilter(taskFilterDto);
         }
         else {
             return this.tasksService.getAllTasks();
