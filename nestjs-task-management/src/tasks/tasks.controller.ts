@@ -3,6 +3,7 @@ import { TasksService } from './tasks.service';
 import { Task, TaskStatus } from './task.model';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { GetTaskFilterDto } from './dto/get-task-filter.dto';
+import { TaskStatusValidationPipe } from './pipes/task-status-validation.pipe';
 
 @Controller('tasks')
 export class TasksController {
@@ -13,7 +14,7 @@ export class TasksController {
 
     @Get()
     getTasks(
-       @Query() taskFilterDto : GetTaskFilterDto): Task[] {
+       @Query(ValidationPipe) taskFilterDto : GetTaskFilterDto): Task[] {
         if(Object.keys(taskFilterDto).length) {
             return this.tasksService.getTasksWithFilter(taskFilterDto);
         }
@@ -35,7 +36,7 @@ export class TasksController {
     }
 
     @Patch('/:id/status')
-    updateTaskStatus(@Param('id') id: string, @Body('status') status: TaskStatus ) : Task {
+    updateTaskStatus(@Param('id') id: string, @Body('status', TaskStatusValidationPipe) status: TaskStatus ) : Task {
         console.log('Patch route triggered');
         return this.tasksService.updateTaskStatus(id, status);
     }

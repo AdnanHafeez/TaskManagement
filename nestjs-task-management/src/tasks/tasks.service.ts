@@ -29,7 +29,9 @@ export class TasksService {
         let res : Task = this.tasks.find(task => 
             task.id === id
         );
-        return res;
+        if(res)
+            return res;
+        throw new NotFoundException(`Task with id ${id} not found`);
     }
     createTask(createtaskDto: CreateTaskDto) : Task {
         const {title, description} = createtaskDto;
