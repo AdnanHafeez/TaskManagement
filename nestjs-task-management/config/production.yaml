@@ -1,2 +1,5 @@
 db:
   synchronize: false
+
+server:
+  origin: http://task-management-frontend-reactjs.s3-website-ap-southeast-2.amazonaws.com
