@@ -3,7 +3,7 @@ server:
 
 db:
   type: 'oracle'
-  port: '1522'
+  port: 1522
   database: 'ORACLE_OCM'
   synchronize: true
 
