@@ -21,7 +21,6 @@ export class TasksController {
     getTasks(
        @Query(ValidationPipe) taskFilterDto : GetTaskFilterDto,
        @GetUser() user: User): Promise<Task[]> {
-           console.log('user', user);
        return this.tasksService.getTasks(taskFilterDto, user);
     }
 

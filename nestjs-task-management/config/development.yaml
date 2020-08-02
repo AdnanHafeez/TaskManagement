@@ -1,0 +1,7 @@
+db:
+  username: 'ORACLE_OCM'
+  password: 'hiu5Voiw'
+  port: 1522
+
+jwt:
+  secret: 'topSecret51'
